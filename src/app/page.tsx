@@ -1,22 +1,50 @@
+"use client"
+
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
+
+  useEffect(() => {
+    if (!api) return
+
+    const interval = setInterval(() => {
+      api.scrollNext()
+    }, 3000) // Auto-scroll every 3 seconds
+
+    return () => clearInterval(interval)
+  }, [api])
+
   return (
     <main className="min-h-screen bg-background">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-40 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-16 sm:px-28 lg:px-40">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
+            <div className="flex">
               <Image
-                src="/Images/Zemenay White Tech.png"
-                alt="Team collaboration illustration"
-                width={600}
-                height={400}
-                className="w-full h-auto"
-                priority
+                src="/Images/Zemnay Black Tech.png"
+                alt="Zemenay Tech"
+                width={180}
+                height={100}
               />
             </div>
             <div className="hidden md:flex items-center space-x-8">
@@ -30,23 +58,33 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="bg-gradient-to-br from-blue-600 to-blue-800 min-h-screen flex items-center relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-40 py-20 mt-16">
+      <section id="home" className="relative min-h-screen flex items-center">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/Images/Hero-background.jpg"
+            alt="Hero Background"
+            fill={true}
+            priority={true}
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30"></div>
+        </div>
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-40 py-20 mt-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-white space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Revolutionize Your Digital Experience
               </h1>
-              <p className="text-xl text-blue-100 leading-relaxed">
+              <p className="text-xl leading-relaxed">
                 At Zemenay, we build clean, scalable, and elegant digital experiences for forward-thinking businesses.
               </p>
-              <button className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 rounded-lg font-semibold transition-colors duration-300">
-                Let's Build Together
+              <button className="bg-white hover:bg-blue-600 hover:text-white text-black text-lg px-8 py-4 rounded-lg font-semibold transition-colors duration-300">
+                Let&apos;s Build Together
               </button>
             </div>
             <div className="relative">
               <Image
-                src="/Images/remove background project.png"
+                src="/Images/Remove background project.png"
                 alt="Team collaboration illustration"
                 width={600}
                 height={400}
@@ -152,42 +190,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Clients Section with Accordion */}
+      {/* Clients Section with Carousel */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-6">
-              Clients We've Had the Pleasure to Work With
+              Clients We&apos;ve Had the Pleasure to Work With
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We're proud to have collaborated with these industry leaders, helping them achieve their digital transformation goals.
+              We&apos;re proud to have collaborated with these industry leaders, helping them achieve their digital transformation goals.
             </p>
           </div>
 
-          <Accordion type="single" collapsible className="w-full max-w-4xl mx-auto">
-            <AccordionItem value="item-1">
-              <AccordionTrigger className="text-lg font-semibold">
-                Our Client Portfolio
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 pt-4">
-                  {/* Client 1 */}
+          <div className="max-w-6xl mx-auto">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              setApi={setApi}
+              className="w-full group"
+              onMouseEnter={() => {
+                if (api) {
+                  api.scrollTo(api.selectedScrollSnap())
+                }
+              }}
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {/* Client 1 */}
+                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
                   <div className="bg-gray-800 p-6 rounded-lg flex flex-col items-center justify-center h-32">
                     <div className="text-center">
                       <div className="text-yellow-400 font-bold text-lg">HIYAW</div>
                       <div className="text-yellow-400 text-sm">ANIMATION</div>
                     </div>
                   </div>
+                </CarouselItem>
 
-                  {/* Client 2 */}
+                {/* Client 2 */}
+                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
                   <div className="bg-gray-800 p-6 rounded-lg flex flex-col items-center justify-center h-32">
                     <div className="text-center">
                       <div className="text-orange-400 font-bold text-lg">Shine</div>
                       <div className="text-orange-400 text-sm">Tech</div>
                     </div>
                   </div>
+                </CarouselItem>
 
-                  {/* Client 3 */}
+                {/* Client 3 */}
+                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
                   <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32">
                     <Image
                       src="/Images/Berhanu.jpg"
@@ -197,8 +248,10 @@ export default function Home() {
                       className="w-20 h-10 object-contain"
                     />
                   </div>
+                </CarouselItem>
 
-                  {/* Client 4 */}
+                {/* Client 4 */}
+                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
                   <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32">
                     <Image
                       src="/Images/EGA.png"
@@ -208,16 +261,20 @@ export default function Home() {
                       className="w-20 h-10 object-contain"
                     />
                   </div>
+                </CarouselItem>
 
-                  {/* Client 5 */}
+                {/* Client 5 */}
+                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
                   <div className="bg-green-600 p-6 rounded-lg flex flex-col items-center justify-center h-32">
                     <div className="text-center text-white">
                       <div className="font-bold text-sm">ጨዋታ አዋቂ</div>
                       <div className="text-xs">CHEWATA AWAQI</div>
                     </div>
                   </div>
+                </CarouselItem>
 
-                  {/* Client 6 */}
+                {/* Client 6 */}
+                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
                   <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32">
                     <Image
                       src="/Images/The disruptors den.png"
@@ -227,10 +284,25 @@ export default function Home() {
                       className="w-20 h-10 object-contain"
                     />
                   </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+            
+            {/* Dots Indicator */}
+            <div className="flex justify-center mt-8 space-x-2">
+              {Array.from({ length: count }).map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-3 h-3 rounded-full transition-colors ${
+                    index === current - 1 ? "bg-blue-600" : "bg-gray-300"
+                  }`}
+                  onClick={() => api?.scrollTo(index)}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -240,7 +312,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-6">What Our Clients Say</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Don't just take our word for it. Here's what industry professionals have to say about our services and solutions.
+              Don&apos;t just take our word for it. Here&apos;s what industry professionals have to say about our services and solutions.
             </p>
           </div>
 
@@ -260,7 +332,7 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  "Working with this team has been an absolute game-changer for our business. Their innovative solutions have streamlined our processes and boosted our productivity tenfold!"
+                  &ldquo;Working with this team has been an absolute game-changer for our business. Their innovative solutions have streamlined our processes and boosted our productivity tenfold!&rdquo;
                 </p>
               </CardContent>
             </Card>
@@ -280,7 +352,7 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  "I can't recommend their services enough. The level of expertise and dedication they bring to each project is unparalleled. Our ROI has skyrocketed since partnering with them."
+                  &ldquo;I can&apos;t recommend their services enough. The level of expertise and dedication they bring to each project is unparalleled. Our ROI has skyrocketed since partnering with them.&rdquo;
                 </p>
               </CardContent>
             </Card>
@@ -300,7 +372,7 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  "The customer support is top-notch. They're always available to answer questions and provide guidance. It's refreshing to work with a company that truly cares about its clients' success."
+                  &ldquo;The customer support is top-notch. They&apos;re always available to answer questions and provide guidance. It&apos;s refreshing to work with a company that truly cares about its clients&apos; success.&rdquo;
                 </p>
               </CardContent>
             </Card>
@@ -314,11 +386,13 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             {/* Logo and Company */}
             <div className="md:col-span-1">
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-lg">Z</span>
-                </div>
-                <span className="text-xl font-bold text-foreground">Zemenay Tech</span>
+              <div className="flex mb-4">
+                <Image
+                  src="/Images/Zemnay Black Tech.png"
+                  alt="Zemenay Tech"
+                  width={180}
+                  height={100}
+                />
               </div>
             </div>
 
