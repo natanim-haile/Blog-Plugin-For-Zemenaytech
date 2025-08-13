@@ -14,9 +14,12 @@ const config: Config = {
   		padding: '2rem',
   		screens: {
   			'2xl': '1400px'
-  		}
+  		},
   	},
   	extend: {
+		fontFamily: {
+			outfit: ['var(--font-outfit)'],
+		},
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
