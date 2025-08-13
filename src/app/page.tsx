@@ -8,6 +8,7 @@ import { useTheme } from 'next-themes';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -66,21 +67,21 @@ export default function Home() {
                   ? 'text-muted-foreground hover:text-primary' 
                   : 'text-white hover:text-blue-200'
               }`}>Home</a>
-              <a href="#about" className={`transition-colors ${
+              <Link href="/about" className={`transition-colors ${
                 isScrolled 
                   ? 'text-muted-foreground hover:text-primary' 
                   : 'text-white hover:text-blue-200'
-              }`}>About</a>
-              <a href="#services" className={`transition-colors ${
+              }`}>About</Link>
+              <Link href="/services" className={`transition-colors ${
                 isScrolled 
                   ? 'text-muted-foreground hover:text-primary' 
                   : 'text-white hover:text-blue-200'
-              }`}>Services</a>
-              <a href="#pricing" className={`transition-colors ${
+              }`}>Services</Link>
+              <Link href="/pricing" className={`transition-colors ${
                 isScrolled 
                   ? 'text-muted-foreground hover:text-primary' 
                   : 'text-white hover:text-blue-200'
-              }`}>Pricing</a>
+              }`}>Pricing</Link>
               <ThemeToggle />
             </div>
 
@@ -103,32 +104,32 @@ export default function Home() {
           </div>
 
           {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden py-4 border-t border-border">
-              <div className="flex flex-col space-y-4">
-                <a href="#home" className={`transition-colors ${
-                  isScrolled 
-                    ? 'text-muted-foreground hover:text-primary' 
-                    : 'text-white hover:text-blue-200'
-                }`} onClick={() => setIsMobileMenuOpen(false)}>Home</a>
-                <a href="#about" className={`transition-colors ${
-                  isScrolled 
-                    ? 'text-muted-foreground hover:text-primary' 
-                    : 'text-white hover:text-blue-200'
-                }`} onClick={() => setIsMobileMenuOpen(false)}>About</a>
-                <a href="#services" className={`transition-colors ${
-                  isScrolled 
-                    ? 'text-muted-foreground hover:text-primary' 
-                    : 'text-white hover:text-blue-200'
-                }`} onClick={() => setIsMobileMenuOpen(false)}>Services</a>
-                <a href="#pricing" className={`transition-colors ${
-                  isScrolled 
-                    ? 'text-muted-foreground hover:text-primary' 
-                    : 'text-white hover:text-blue-200'
-                }`} onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
+                      {isMobileMenuOpen && (
+              <div className="md:hidden py-4 border-t border-border">
+                <div className="flex flex-col space-y-4">
+                  <a href="#home" className={`transition-colors ${
+                    isScrolled 
+                      ? 'text-muted-foreground hover:text-primary' 
+                      : 'text-white hover:text-blue-200'
+                  }`} onClick={() => setIsMobileMenuOpen(false)}>Home</a>
+                  <Link href="/about" className={`transition-colors ${
+                    isScrolled 
+                      ? 'text-muted-foreground hover:text-primary' 
+                      : 'text-white hover:text-blue-200'
+                  }`} onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+                  <Link href="/services" className={`transition-colors ${
+                    isScrolled 
+                      ? 'text-muted-foreground hover:text-primary' 
+                      : 'text-white hover:text-blue-200'
+                  }`} onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
+                  <Link href="/pricing" className={`transition-colors ${
+                    isScrolled 
+                      ? 'text-muted-foreground hover:text-primary' 
+                      : 'text-white hover:text-blue-200'
+                  }`} onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       </nav>
 
@@ -449,9 +450,9 @@ export default function Home() {
               <h3 className="font-semibold text-foreground mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 <li><a href="#home" className="text-muted-foreground hover:text-primary transition-colors">Home</a></li>
-                <li><a href="#about" className="text-muted-foreground hover:text-primary transition-colors">About</a></li>
-                <li><a href="#services" className="text-muted-foreground hover:text-primary transition-colors">Services</a></li>
-                <li><a href="#pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</a></li>
+                <li><Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">About</Link></li>
+                <li><Link href="/services" className="text-muted-foreground hover:text-primary transition-colors">Services</Link></li>
+                <li><Link href="/pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</Link></li>
                 <li><a href="#contact" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</a></li>
               </ul>
             </div>
