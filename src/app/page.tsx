@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import {Marquee, MarqueeContent, MarqueeFade, MarqueeItem,} from '@/components/ui/shadcn-io/marquee';
+import {Marquee, MarqueeContent, MarqueeItem,} from '@/components/ui/shadcn-io/marquee';
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { ThemeToggle } from '@/components/theme-toggle';
