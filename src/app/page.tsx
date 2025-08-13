@@ -15,19 +15,16 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme } = useTheme();
 
+// ...existing code...
   useEffect(() => {
     const handleScroll = () => {
-      const heroSection = document.getElementById('home');
-      if (heroSection) {
-        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-        const scrollPosition = window.scrollY + 100; // 100px buffer
-        setIsScrolled(scrollPosition > heroBottom);
-      }
+      setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+// ...existing code...
 
   // Determine which logo to use based on scroll position and theme
   const getLogoSource = () => {
@@ -82,12 +79,12 @@ export default function Home() {
                   ? 'text-muted-foreground hover:text-primary' 
                   : 'text-white hover:text-blue-200'
               }`}>Pricing</Link>
-              <ThemeToggle />
+              <ThemeToggle className={isScrolled ? "text-muted-foreground hover:text-primary" : "text-white hover:text-blue-200"} />
             </div>
 
             {/* Mobile Navigation */}
             <div className="md:hidden flex items-center space-x-4">
-              <ThemeToggle />
+              <ThemeToggle className={isScrolled ? "text-muted-foreground hover:text-primary" : "text-white hover:text-blue-200"} />
               <Button
                 variant="ghost"
                 size="icon"
@@ -105,8 +102,12 @@ export default function Home() {
 
           {/* Mobile Menu */}
                       {isMobileMenuOpen && (
-              <div className="md:hidden py-4 border-t border-border">
-                <div className="flex flex-col space-y-4">
+              <div 
+              className={`md:hidden py-4 border-t border-border rounded-b-lg shadow-lg transition-colors duration-300 ${
+                isScrolled ? 'bg-background' : 'bg-black/90'
+              }`}
+              >
+                <div className="flex flex-col space-y-4 pl-4">
                   <a href="#home" className={`transition-colors ${
                     isScrolled 
                       ? 'text-muted-foreground hover:text-primary' 
@@ -154,9 +155,13 @@ export default function Home() {
               <p className="text-xl leading-relaxed">
                 At Zemenay, we build clean, scalable, and elegant digital experiences for forward-thinking businesses.
               </p>
-              <button className="bg-white hover:bg-blue-600 hover:text-white text-black text-lg px-8 py-4 rounded-lg font-semibold transition-colors duration-300">
-                Let&apos;s Build Together
-              </button>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <Link href="/contact">
+                <button className="bg-white hover:bg-blue-600 hover:text-white text-black text-lg px-8 py-4 rounded-lg font-semibold transition-colors duration-300">
+                  Let&apos;s Build Together
+                </button>
+                </Link>
+              </div>
             </div>
             <div className="relative">
               <Image
@@ -259,9 +264,11 @@ export default function Home() {
            </div>
 
            <div className="text-center mt-16">
-             <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-colors duration-300">
-               Get Started
-             </button>
+            <Link href="/contact">
+              <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-colors duration-300">
+                Get Started
+              </button>
+            </Link>
            </div>
          </div>
        </section>
