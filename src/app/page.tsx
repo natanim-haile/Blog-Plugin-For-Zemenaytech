@@ -2,58 +2,133 @@
 
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
+import {Marquee, MarqueeContent, MarqueeFade, MarqueeItem,} from '@/components/ui/shadcn-io/marquee';
 import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { Menu } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
-  const [api, setApi] = useState<CarouselApi>()
-  const [current, setCurrent] = useState(0)
-  const [count, setCount] = useState(0)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
-    if (!api) {
-      return
+    const handleScroll = () => {
+      const heroSection = document.getElementById('home');
+      if (heroSection) {
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        const scrollPosition = window.scrollY + 100; // 100px buffer
+        setIsScrolled(scrollPosition > heroBottom);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Determine which logo to use based on scroll position and theme
+  const getLogoSource = () => {
+    if (!isScrolled) {
+      // During hero section - always use white logo
+      return "/Images/Zemnay White Tech.png";
+    } else {
+      // After scrolling - use theme-appropriate logo
+      return theme === "dark" ? "/Images/Zemnay White Tech.png" : "/Images/Zemnay Black Tech.png";
     }
-
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap() + 1)
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1)
-    })
-  }, [api])
-
-  useEffect(() => {
-    if (!api) return
-
-    const interval = setInterval(() => {
-      api.scrollNext()
-    }, 3000) // Auto-scroll every 3 seconds
-
-    return () => clearInterval(interval)
-  }, [api])
+  };
 
   return (
     <main className="min-h-screen bg-background">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-background/95 backdrop-blur-sm border-b border-border' 
+          : 'bg-transparent'
+      }`}>
         <div className="container mx-auto px-16 sm:px-28 lg:px-40">
           <div className="flex justify-between items-center h-16">
             <div className="flex">
               <Image
-                src="/Images/Zemnay Black Tech.png"
+                src={getLogoSource()}
                 alt="Zemenay Tech"
                 width={180}
                 height={100}
+                className="transition-all duration-300"
               />
             </div>
+            
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#home" className="text-muted-foreground hover:text-primary transition-colors">Home</a>
-              <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">About</a>
-              <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">Services</a>
-              <a href="#pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</a>
+              <a href="#home" className={`transition-colors ${
+                isScrolled 
+                  ? 'text-muted-foreground hover:text-primary' 
+                  : 'text-white hover:text-blue-200'
+              }`}>Home</a>
+              <a href="#about" className={`transition-colors ${
+                isScrolled 
+                  ? 'text-muted-foreground hover:text-primary' 
+                  : 'text-white hover:text-blue-200'
+              }`}>About</a>
+              <a href="#services" className={`transition-colors ${
+                isScrolled 
+                  ? 'text-muted-foreground hover:text-primary' 
+                  : 'text-white hover:text-blue-200'
+              }`}>Services</a>
+              <a href="#pricing" className={`transition-colors ${
+                isScrolled 
+                  ? 'text-muted-foreground hover:text-primary' 
+                  : 'text-white hover:text-blue-200'
+              }`}>Pricing</a>
+              <ThemeToggle />
+            </div>
+
+            {/* Mobile Navigation */}
+            <div className="md:hidden flex items-center space-x-4">
+              <ThemeToggle />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className={`h-9 w-9 ${
+                  isScrolled 
+                    ? 'text-muted-foreground hover:text-primary' 
+                    : 'text-white hover:text-blue-200'
+                }`}
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
             </div>
           </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden py-4 border-t border-border">
+              <div className="flex flex-col space-y-4">
+                <a href="#home" className={`transition-colors ${
+                  isScrolled 
+                    ? 'text-muted-foreground hover:text-primary' 
+                    : 'text-white hover:text-blue-200'
+                }`} onClick={() => setIsMobileMenuOpen(false)}>Home</a>
+                <a href="#about" className={`transition-colors ${
+                  isScrolled 
+                    ? 'text-muted-foreground hover:text-primary' 
+                    : 'text-white hover:text-blue-200'
+                }`} onClick={() => setIsMobileMenuOpen(false)}>About</a>
+                <a href="#services" className={`transition-colors ${
+                  isScrolled 
+                    ? 'text-muted-foreground hover:text-primary' 
+                    : 'text-white hover:text-blue-200'
+                }`} onClick={() => setIsMobileMenuOpen(false)}>Services</a>
+                <a href="#pricing" className={`transition-colors ${
+                  isScrolled 
+                    ? 'text-muted-foreground hover:text-primary' 
+                    : 'text-white hover:text-blue-200'
+                }`} onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -69,7 +144,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-black/30"></div>
         </div>
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-40 py-20 mt-16">
+        <div className="relative z-10 container mx-auto px-20 sm:px-32 lg:px-40 py-20 mt-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-white space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
@@ -190,7 +265,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Clients Section with Carousel */}
+      {/* Clients Section with Marquee */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -203,43 +278,31 @@ export default function Home() {
           </div>
 
           <div className="max-w-6xl mx-auto">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              setApi={setApi}
-              className="w-full group"
-              onMouseEnter={() => {
-                if (api) {
-                  api.scrollTo(api.selectedScrollSnap())
-                }
-              }}
-            >
-              <CarouselContent className="-ml-2 md:-ml-4">
+            <Marquee className="w-full">
+              <MarqueeContent>
                 {/* Client 1 */}
-                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
-                  <div className="bg-gray-800 p-6 rounded-lg flex flex-col items-center justify-center h-32">
+                <MarqueeItem className="mx-4">
+                  <div className="bg-gray-800 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
                     <div className="text-center">
                       <div className="text-yellow-400 font-bold text-lg">HIYAW</div>
                       <div className="text-yellow-400 text-sm">ANIMATION</div>
                     </div>
                   </div>
-                </CarouselItem>
+                </MarqueeItem>
 
                 {/* Client 2 */}
-                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
-                  <div className="bg-gray-800 p-6 rounded-lg flex flex-col items-center justify-center h-32">
+                <MarqueeItem className="mx-4">
+                  <div className="bg-gray-800 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
                     <div className="text-center">
                       <div className="text-orange-400 font-bold text-lg">Shine</div>
                       <div className="text-orange-400 text-sm">Tech</div>
                     </div>
                   </div>
-                </CarouselItem>
+                </MarqueeItem>
 
                 {/* Client 3 */}
-                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
-                  <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32">
+                <MarqueeItem className="mx-4">
+                  <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
                     <Image
                       src="/Images/Berhanu.jpg"
                       alt="Berhanu Integrated Farm"
@@ -248,11 +311,11 @@ export default function Home() {
                       className="w-20 h-10 object-contain"
                     />
                   </div>
-                </CarouselItem>
+                </MarqueeItem>
 
                 {/* Client 4 */}
-                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
-                  <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32">
+                <MarqueeItem className="mx-4">
+                  <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
                     <Image
                       src="/Images/EGA.png"
                       alt="EGA"
@@ -261,21 +324,21 @@ export default function Home() {
                       className="w-20 h-10 object-contain"
                     />
                   </div>
-                </CarouselItem>
+                </MarqueeItem>
 
                 {/* Client 5 */}
-                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
-                  <div className="bg-green-600 p-6 rounded-lg flex flex-col items-center justify-center h-32">
+                <MarqueeItem className="mx-4">
+                  <div className="bg-green-600 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
                     <div className="text-center text-white">
                       <div className="font-bold text-sm">ጨዋታ አዋቂ</div>
                       <div className="text-xs">CHEWATA AWAQI</div>
                     </div>
                   </div>
-                </CarouselItem>
+                </MarqueeItem>
 
                 {/* Client 6 */}
-                <CarouselItem className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/6">
-                  <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32">
+                <MarqueeItem className="mx-4">
+                  <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
                     <Image
                       src="/Images/The disruptors den.png"
                       alt="THE DISRUPTORS DEN"
@@ -284,24 +347,9 @@ export default function Home() {
                       className="w-20 h-10 object-contain"
                     />
                   </div>
-                </CarouselItem>
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
-            
-            {/* Dots Indicator */}
-            <div className="flex justify-center mt-8 space-x-2">
-              {Array.from({ length: count }).map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    index === current - 1 ? "bg-blue-600" : "bg-gray-300"
-                  }`}
-                  onClick={() => api?.scrollTo(index)}
-                />
-              ))}
-            </div>
+                </MarqueeItem>
+              </MarqueeContent>
+            </Marquee>
           </div>
         </div>
       </section>
