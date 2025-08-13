@@ -184,87 +184,87 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="services" className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* Feature 1 */}
-            <Card className="card-hover">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>Clean & Minimalist Interfaces</CardTitle>
-                  <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Image
-                      src="/Images/png piture 2.png"
-                      alt="Interface illustration"
-                      width={40}
-                      height={40}
-                      className="w-10 h-10"
-                    />
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Optimize your digital presence with our high-speed solutions, ensuring your users experience seamless interactions.
-                </CardDescription>
-              </CardContent>
-            </Card>
+             {/* Features Section */}
+       <section id="services" className="py-20 bg-muted/50">
+         <div className="container mx-auto px-16 sm:px-36 lg:px-48">
+           <div className="space-y-20">
+             {/* Feature 1 */}
+             <div className="grid lg:grid-cols-2 gap-12 items-center">
+               <div className="space-y-6">
+                 <h3 className="text-3xl md:text-4xl font-bold text-foreground">
+                   Clean & Minimalist Interfaces
+                 </h3>
+                 <p className="text-lg text-muted-foreground leading-relaxed">
+                   Optimize your digital presence with our high-speed solutions, ensuring your users experience seamless interactions.
+                 </p>
+               </div>
+               <div className="flex justify-center lg:justify-end">
+                 <div className="w-64 h-64 rounded-lg flex items-center justify-center">
+                   <Image
+                     src="/Images/png piture 2.png"
+                     alt="Interface illustration"
+                     width={200}
+                     height={200}
+                     className="w-64 h-64 object-contain"
+                   />
+                 </div>
+               </div>
+             </div>
 
-            {/* Feature 2 */}
-            <Card className="card-hover">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>Scalable, High-Performance Code</CardTitle>
-                  <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center">
-                    <Image
-                      src="/Images/png picture 3.png"
-                      alt="Code illustration"
-                      width={40}
-                      height={40}
-                      className="w-10 h-10"
-                    />
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Protect your data and users with our state-of-the-art security measures, giving you peace of mind in the digital landscape.
-                </CardDescription>
-              </CardContent>
-            </Card>
+             {/* Feature 2 */}
+             <div className="grid lg:grid-cols-2 gap-12 items-center">
+               <div className="flex justify-center lg:justify-start order-2 lg:order-1">
+                 <div className="w-64 h-64 rounded-lg flex items-center justify-center">
+                   <Image
+                     src="/Images/png picture 2.png"
+                     alt="Code illustration"
+                     width={200}
+                     height={200}
+                     className="w-64 h-64 object-contain"
+                   />
+                 </div>
+               </div>
+               <div className="space-y-6 order-1 lg:order-2">
+                 <h3 className="text-3xl md:text-4xl font-bold text-foreground">
+                   Scalable, High-Performance Code
+                 </h3>
+                 <p className="text-lg text-muted-foreground leading-relaxed">
+                   Protect your data and users with our state-of-the-art security measures, giving you peace of mind in the digital landscape.
+                 </p>
+               </div>
+             </div>
 
-            {/* Feature 3 */}
-            <Card className="card-hover">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>Reliable Support & Maintenance</CardTitle>
-                  <div className="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <Image
-                      src="/Images/Remove background project.png"
-                      alt="Support illustration"
-                      width={40}
-                      height={40}
-                      className="w-10 h-10"
-                    />
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Grow your business without limits using our scalable infrastructure, designed to evolve with your needs.
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </div>
+             {/* Feature 3 */}
+             <div className="grid lg:grid-cols-2 gap-12 items-center">
+               <div className="space-y-6">
+                 <h3 className="text-3xl md:text-4xl font-bold text-foreground">
+                   Reliable Support & Maintenance
+                 </h3>
+                 <p className="text-lg text-muted-foreground leading-relaxed">
+                   Grow your business without limits using our scalable infrastructure, designed to evolve with your needs.
+                 </p>
+               </div>
+               <div className="flex justify-center lg:justify-end">
+                 <div className="w-64 h-64 rounded-lg flex items-center justify-center">
+                   <Image
+                     src="/Images/png picture 3.png"
+                     alt="Support illustration"
+                     width={200}
+                     height={200}
+                     className="w-64 h-64 object-contain"
+                   />
+                 </div>
+               </div>
+             </div>
+           </div>
 
-          <div className="text-center">
-            <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-colors duration-300">
-              Get Started
-            </button>
-          </div>
-        </div>
-      </section>
+           <div className="text-center mt-16">
+             <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-colors duration-300">
+               Get Started
+             </button>
+           </div>
+         </div>
+       </section>
 
       {/* Clients Section with Marquee */}
       <section className="py-20 bg-background">
@@ -283,21 +283,14 @@ export default function Home() {
               <MarqueeContent>
                 {/* Client 1 */}
                 <MarqueeItem className="mx-4">
-                  <div className="bg-gray-800 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
-                    <div className="text-center">
-                      <div className="text-yellow-400 font-bold text-lg">HIYAW</div>
-                      <div className="text-yellow-400 text-sm">ANIMATION</div>
-                    </div>
-                  </div>
-                </MarqueeItem>
-
-                {/* Client 2 */}
-                <MarqueeItem className="mx-4">
-                  <div className="bg-gray-800 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
-                    <div className="text-center">
-                      <div className="text-orange-400 font-bold text-lg">Shine</div>
-                      <div className="text-orange-400 text-sm">Tech</div>
-                    </div>
+                  <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
+                    <Image
+                      src="/Images/HIyaw animations.jpg"
+                      alt="Hiyaw Animations"
+                      width={80}
+                      height={40}
+                      className="w-20 h-10 object-contain"
+                    />
                   </div>
                 </MarqueeItem>
 
@@ -329,11 +322,14 @@ export default function Home() {
 
                 {/* Client 5 */}
                 <MarqueeItem className="mx-4">
-                  <div className="bg-green-600 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
-                    <div className="text-center text-white">
-                      <div className="font-bold text-sm">ጨዋታ አዋቂ</div>
-                      <div className="text-xs">CHEWATA AWAQI</div>
-                    </div>
+                  <div className="bg-gray-100 p-6 rounded-lg flex flex-col items-center justify-center h-32 w-48">
+                    <Image
+                      src="/Images/Chewata Awaki.png"
+                      alt="Chewata Awaki"
+                      width={80}
+                      height={40}
+                      className="w-20 h-10 object-contain"
+                    />
                   </div>
                 </MarqueeItem>
 
