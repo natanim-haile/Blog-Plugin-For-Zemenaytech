@@ -94,15 +94,6 @@ export default function Services() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card className="card-hover">
               <CardHeader>
-                <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <Image
-                    src="/Images/png piture 2.png"
-                    alt="Web Development"
-                    width={32}
-                    height={32}
-                    className="w-8 h-8"
-                  />
-                </div>
                 <CardTitle className="text-xl">Full Stack Website Development</CardTitle>
               </CardHeader>
               <CardContent>
@@ -115,15 +106,6 @@ export default function Services() {
 
             <Card className="card-hover">
               <CardHeader>
-                <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                  <Image
-                    src="/Images/png picture 3.png"
-                    alt="WordPress"
-                    width={32}
-                    height={32}
-                    className="w-8 h-8"
-                  />
-                </div>
                 <CardTitle className="text-xl">WordPress Development with Elementor Pro</CardTitle>
               </CardHeader>
               <CardContent>
@@ -136,15 +118,6 @@ export default function Services() {
 
             <Card className="card-hover">
               <CardHeader>
-                <div className="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <Image
-                    src="/Images/Remove background project.png"
-                    alt="SEO"
-                    width={32}
-                    height={32}
-                    className="w-8 h-8"
-                  />
-                </div>
                 <CardTitle className="text-xl">SEO Management</CardTitle>
               </CardHeader>
               <CardContent>
@@ -157,15 +130,6 @@ export default function Services() {
 
             <Card className="card-hover">
               <CardHeader>
-                <div className="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                  <Image
-                    src="/Images/png piture 2.png"
-                    alt="Maintenance"
-                    width={32}
-                    height={32}
-                    className="w-8 h-8"
-                  />
-                </div>
                 <CardTitle className="text-xl">Website Maintenance</CardTitle>
               </CardHeader>
               <CardContent>

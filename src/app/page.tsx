@@ -48,7 +48,7 @@ export default function Home() {
           ? 'bg-background/95 backdrop-blur-sm border-b border-border' 
           : 'bg-transparent'
       }`}>
-        <div className="container mx-auto px-16 sm:px-28 lg:px-40">
+        <div className="container mx-auto px-8 sm:px-28 lg:px-40">
           <div className="flex justify-between items-center h-16">
             <div className="flex">
               <Image
@@ -145,7 +145,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-black/30"></div>
         </div>
-        <div className="relative z-10 container mx-auto px-20 sm:px-32 lg:px-40 py-20 mt-16">
+        <div className="relative z-10 container mx-auto px-12 sm:px-24 lg:px-40 py-8 sm:py-20 mt-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-white space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
@@ -174,7 +174,7 @@ export default function Home() {
 
       {/* Why Zemenay Section */}
       <section id="about" className="py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-10 sm:px-24 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl font-bold text-foreground mb-6">Why Zemenay</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -201,7 +201,7 @@ export default function Home() {
                <div className="flex justify-center lg:justify-end">
                  <div className="w-64 h-64 rounded-lg flex items-center justify-center">
                    <Image
-                     src="/Images/png piture 2.png"
+                     src="/Images/png picture 1.png"
                      alt="Interface illustration"
                      width={200}
                      height={200}
@@ -268,7 +268,7 @@ export default function Home() {
 
       {/* Clients Section with Marquee */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-10 sm:px-16 lg:px-36">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-6">
               Clients We&apos;ve Had the Pleasure to Work With
@@ -353,7 +353,7 @@ export default function Home() {
 
       {/* Testimonials Section with Cards */}
       <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-10 sm:px-24 lg:px-36">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-6">What Our Clients Say</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
